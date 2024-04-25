@@ -37,10 +37,20 @@ def lambda_handler(event, context):
     )
 
     # read data
-    if 'body' in event.keys():
-        data = json.loads(event['body'])['data']
-    else:
-        data = event['data']
+    try:
+        # Obtener los datos del cuerpo de la solicitud
+        if 'body' in event:
+            body = json.loads(event['body'])
+            data = body['data']
+        else:
+            data = event['data']
+
+        # Resto del código para procesar los datos
+    except KeyError as e:
+        return {
+            "statusCode": 400,
+            "body": json.dumps({"error": str(e)})
+        }
 
     # predict
     data['State'] = f" {data.get('State').strip()}"
