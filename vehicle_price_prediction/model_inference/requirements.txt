@@ -1,0 +1,6 @@
+requests
+pandas
+numpy==1.26.2
+scikit-learn
+xgboost
+joblib
