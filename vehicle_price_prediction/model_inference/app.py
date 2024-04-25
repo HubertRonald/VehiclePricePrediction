@@ -61,7 +61,7 @@ def lambda_handler(event, context):
     return {
         "statusCode": 200,
         "body": json.dumps({
-            "prediction": enc_pred
+            "prediction": float(enc_pred)
         }),
     }
 
