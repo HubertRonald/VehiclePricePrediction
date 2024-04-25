@@ -6,6 +6,9 @@ version = 0.1
 [default.global.parameters]
 stack_name = "vehicle_price_prediction"
 
+[default.deploy.parameters]
+stack_name = "vehicle_price_prediction"
+
 [default.build.parameters]
 cached = true
 parallel = true
