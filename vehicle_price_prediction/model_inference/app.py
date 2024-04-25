@@ -43,6 +43,7 @@ def lambda_handler(event, context):
         data = event['data']
 
     # predict
+    data['State'] = f" {data.get('State').strip()}"
     X_request = pd.DataFrame({col:{'0':val} for col, val in data.items()})
     enc_pred = model.predict(X_request)[0]
     
