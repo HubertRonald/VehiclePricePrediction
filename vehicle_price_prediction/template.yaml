@@ -8,7 +8,7 @@ Description: >
 Globals:
   Function:
     Timeout: 180
-    MemorySize: 1024
+    MemorySize: 2048
 
     # You can add LoggingConfig parameters such as the Logformat, Log Group, and SystemLogLevel or ApplicationLogLevel. Learn more here https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-loggingconfig.
     LoggingConfig:
@@ -17,6 +17,8 @@ Resources:
   ModelInferenceFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
+      Code:
+          Unzip: true
       CodeUri: model_inference/
       Handler: app.lambda_handler
       Runtime: python3.9

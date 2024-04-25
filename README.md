@@ -2,7 +2,7 @@
 
 ```bash
 curl --request POST \
-  --url https://localhost:3000/inferences \
+  --url https://localhost:3000/inference \
   --header 'content-type: application/json' \
   --data '{
         "data": {
