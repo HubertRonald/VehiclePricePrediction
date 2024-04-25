@@ -8,12 +8,6 @@ from inspect import cleandoc
 s3_client = boto3.client('s3')
 
 
-def clean_string(df):
-    for col in df.columns:
-        df.loc[:, col] = df.loc[:,col].str.strip().str.lower()
-    return df.astype('category')
-
-
 # import requests
 def lambda_handler(event, context):
     """Sample pure Lambda function
