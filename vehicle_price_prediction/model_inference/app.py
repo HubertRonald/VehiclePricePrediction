@@ -1,11 +1,7 @@
 import json
-import boto3
 import joblib
-from io import BytesIO 
 import pandas as pd
 from inspect import cleandoc
-
-s3_client = boto3.client('s3')
 
 
 # import requests
@@ -31,10 +27,8 @@ def lambda_handler(event, context):
 
 
     # read model (pipeline)
-    model = load_model(
-        s3_bucket='hr-s3-itec', 
-        key='price_xgboost3477.pkl'
-    )
+    path = '/opt/ml/model/'
+    model = joblib.load(path+'price_xgboost3477.pkl')
 
     # read data
     try:
@@ -64,24 +58,3 @@ def lambda_handler(event, context):
             "prediction": float(enc_pred)
         }),
     }
-
-
-def load_model(s3_bucket, key):
-    try:
-        with BytesIO() as file_pkl:
-            s3_client.download_fileobj(s3_bucket, key, file_pkl)
-            file_pkl.seek(0)
-            model = joblib.load(file_pkl)
-
-    except Exception as error:
-        print(error)
-        print(
-            cleandoc(f'''
-                Error getting object {key} from bucket {s3_bucket}. 
-                Make sure they exist and your bucket 
-                is in the same region as this function.
-            ''')
-        )
-        raise error
-    
-    return model

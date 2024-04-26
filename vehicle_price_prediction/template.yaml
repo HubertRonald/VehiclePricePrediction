@@ -1,8 +1,9 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  vehicle_price_prediction
-  Sample SAM Template for vehicle_price_prediction
+  python3.9
+
+  Sample SAM Template for VehiclePricePrediction
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -10,32 +11,23 @@ Globals:
     Timeout: 180
     MemorySize: 2048
 
-    # You can add LoggingConfig parameters such as the Logformat, Log Group, and SystemLogLevel or ApplicationLogLevel. Learn more here https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-loggingconfig.
-    LoggingConfig:
-      LogFormat: JSON
-      
 Resources:
   ModelInferenceFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       PackageType: Image
-      EphemeralStorage: 
-        Size: 2048
-      Policies:
-        - S3ReadPolicy: { "BucketName": "hr-s3-itec" }
       Architectures:
-      - x86_64
+        - x86_64
       Events:
         API:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /inference
             Method: post
-
     Metadata:
-          Dockerfile: Dockerfile
-          DockerContext: ./model_inference
-          DockerTag: python3.9-v1
+      Dockerfile: Dockerfile
+      DockerContext: ./model_inference
+      DockerTag: python3.9-v1
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
