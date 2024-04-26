@@ -18,9 +18,7 @@ Resources:
   ModelInferenceFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: model_inference/
-      Handler: app.lambda_handler
-      Runtime: python3.9
+      PackageType: Image
       EphemeralStorage: 
         Size: 2048
       Policies:
@@ -45,7 +43,7 @@ Outputs:
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
   API:
     Description: API Gateway endpoint URL for Prod stage for ModelInference function
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/prod/inference/"
   ModelInferenceFunction:
     Description: Model Inference Lambda Function ARN
     Value: !GetAtt ModelInferenceFunction.Arn

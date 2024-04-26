@@ -37,7 +37,7 @@ To use the SAM CLI, you need the following tools.
 To build and deploy your application for the first time, run the following in your shell:
 
 ```bash
-sam build --use-container
+sam build
 sam deploy --guided
 ```
 
@@ -53,37 +53,41 @@ You can find your API Gateway Endpoint URL in the output values displayed after 
 
 ## Use the SAM CLI to build and test locally
 
-Build your application with the `sam build --use-container` command.
+Build your application with the `sam build` command.
 
 ```bash
-vehicle_price_prediction$ sam build --use-container
+VehiclePricePrediction$ sam build
 ```
 
-The SAM CLI installs dependencies defined in `model_inference/requirements.txt`, creates a deployment package, and saves it in the `.aws-sam/build` folder.
+```bash
+VehiclePricePrediction$ sam build
+```
+
+The SAM CLI builds a docker image from a Dockerfile and then installs dependencies defined in `model_inference/requirements.txt` inside the docker image. The processed template file is saved in the `.aws-sam/build` folder.
 
 Test a single function by invoking it directly with a test event. An event is a JSON document that represents the input that the function receives from the event source. Test events are included in the `events` folder in this project.
 
 Run functions locally and invoke them with the `sam local invoke` command.
 
 ```bash
-vehicle_price_prediction$ sam local invoke ModelInferenceFunction --event events/event.json
+VehiclePricePrediction$ sam local invoke ModelInferenceFunction --event events/event.json
 ```
 
 The SAM CLI can also emulate your application's API. Use the `sam local start-api` to run the API locally on port 3000.
 
 ```bash
-vehicle_price_prediction$ sam local start-api
-vehicle_price_prediction$ curl http://localhost:3000/
+VehiclePricePrediction$ sam local start-api
+VehiclePricePrediction$ curl http://localhost:3000/
 ```
 
 The SAM CLI reads the application template to determine the API's routes and the functions that they invoke. The `Events` property on each function's definition includes the route and method for each path.
 
 ```yaml
       Events:
-        API:
+        ModelInference:
           Type: Api
           Properties:
-            Path: /inference
+            Path: /hello
             Method: get
 ```
 
@@ -97,22 +101,18 @@ To simplify troubleshooting, SAM CLI has a command called `sam logs`. `sam logs`
 `NOTE`: This command works for all AWS Lambda functions; not just the ones you deploy using SAM.
 
 ```bash
-vehicle_price_prediction$ sam logs -n ModelInferenceFunction --stack-name "vehicle_price_prediction" --tail
+VehiclePricePrediction$ sam logs -n ModelInferenceFunction --stack-name "vehiclepriceprediction" --tail
 ```
 
 You can find more information and examples about filtering Lambda function logs in the [SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
 
-## Tests
+## Unit tests
 
-Tests are defined in the `tests` folder in this project. Use PIP to install the test dependencies and run tests.
+Tests are defined in the `tests` folder in this project. Use PIP to install the [pytest](https://docs.pytest.org/en/latest/) and run unit tests from your local machine.
 
 ```bash
-vehicle_price_prediction$ pip install -r tests/requirements.txt --user
-# unit test
-vehicle_price_prediction$ python -m pytest tests/unit -v
-# integration test, requiring deploying the stack first.
-# Create the env variable AWS_SAM_STACK_NAME with the name of the stack we are testing
-vehicle_price_prediction$ AWS_SAM_STACK_NAME="vehicle_price_prediction" python -m pytest tests/integration -v
+VehiclePricePrediction$ pip install pytest pytest-mock --user
+VehiclePricePrediction$ python -m pytest tests/ -v
 ```
 
 ## Cleanup
@@ -120,7 +120,7 @@ vehicle_price_prediction$ AWS_SAM_STACK_NAME="vehicle_price_prediction" python -
 To delete the sample application that you created, use the AWS CLI. Assuming you used your project name for the stack name, you can run the following:
 
 ```bash
-sam delete --stack-name "vehicle_price_prediction"
+sam delete --stack-name "vehiclepriceprediction"
 ```
 
 ## Resources
