@@ -1,10 +1,13 @@
 [![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=flat-square&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/es/)
 [![Python](https://img.shields.io/badge/python-3670A0?style=flat-square&logo=python&logoColor=ffdd54)](https://peps.python.org/pep-0596/#schedule-first-bugfix-release)
-[![XGBoost-CI](https://github.com/dmlc/xgboost/workflows/XGBoost-CI/badge.svg?branch=master)](https://github.com/dmlc/xgboost/actions)
+[![XGBoost-CI](https://github.com/dmlc/xgboost/workflows/XGBoost-CI/badge.svg?style=flat-square&branch=master)](https://github.com/dmlc/xgboost/actions)
 [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat-square&logo=docker&logoColor=white)](https://hub.docker.com/r/amazon/aws-lambda-python)
 [![Json](https://img.shields.io/badge/json-5E5C5C?style=flat-square&logo=json&logoColor=white)](vehicle_price_prediction/events/event.json)
 [![Hoppscotch](https://img.shields.io/badge/Hoppscotch-31C48D?style=flat-square&logo=hoppscotch&logoColor=white)](https://hoppscotch.io/)
 ![GitHub last commit](https://img.shields.io/github/last-commit/HubertRonald/VehiclePricePrediction?style=flat-square)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/t/HubertRonald/VehiclePricePrediction?style=flat-square&color=dodgerblue)
+
+
 
 # VehiclePricePrediction
 
@@ -114,11 +117,6 @@ flowchart LR
 7. Confirmar despliegue de plantilla compilada para clouformation
 
 
-
-```bash
-aws ecr delete-repository --registry-id <account-id> --repository-name vehicle-price-prediction --force
-```
-
 ## Consumiendo API
 
 Para obtener la prediccion del precio de un vehículo a partir del modelo previamente industrializado se tienen las siguientes opciones
@@ -144,7 +142,28 @@ curl -G \
 
 
 
-## Datos Preditores
+## Eliminar Recursos
 
-Como las consultas se realizan sin una capa front, se proporcionan algunos ejemplos usando el envio masivo con [hoppscotch](https://hoppscotch.io/)
+1. Eliminar imagen de docker en el ECR
+  ```bash
+  aws ecr delete-repository --registry-id <account-id> --repository-name vehicle-price-prediction --force
+  ```
 
+2. Eliminar stack desde `sam`, más informacio [aquí](./vehicle_price_prediction/README.md)
+```bash
+sam delete --stack-name "VehiclePricePrediction"
+```
+
+3. Finalmente en `S3` eliminar aquel bucket creado por `sam` cuyo nombre contenga `VehiclePricePrediction`, hacer lo propio en `cloudformation`
+
+## Fuentes
+
+Documentación consultada y complementaria
+
+1. [Deploying machine learning models with serverless templates](https://aws.amazon.com/es/blogs/compute/deploying-machine-learning-models-with-serverless-templates/)
+2. [Serverless Rest API on AWS with Lambda and API Gateway using SAM (Serverless Application Model)](https://apoorv487.medium.com/serverless-rest-api-on-aws-with-lambda-and-api-gateway-using-sam-serverless-application-model-4aa3b550be1d)
+3. [AWS Lambda Now Supports Up to 10 GB Ephemeral Storage](https://aws.amazon.com/es/blogs/aws/aws-lambda-now-supports-up-to-10-gb-ephemeral-storage/)
+
+Para modelos predictivos más pequeños (sin docker)
+
+4. [Deploying a Machine Learning Model to a Serverless Backend with SAM CLI](https://medium.com/carnegie-mellon-robotics-academy/going-serverless-for-your-ml-backend-with-sam-cli-5332912019ef)
