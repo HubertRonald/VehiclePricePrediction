@@ -114,32 +114,61 @@ flowchart LR
           Creating the required resources...
     ```
 
-7. Confirmar despliegue de plantilla compilada para clouformation
+7. Confirmar despliegue de plantilla compilada en clouformation.
 
 
 ## Consumiendo API
 
-Para obtener la prediccion del precio de un vehículo a partir del modelo previamente industrializado se tienen las siguientes opciones
+Para obtener (método **GET**) la prediccion del precio de un vehículo a partir del modelo previamente industrializado, se tienen las siguientes opciones
 
 1. En una terminal con alguna distribución Linux, Unix (macOS) o PowerShell de Windows (También puede emularse un [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) en Windows)
+   
+    Ejemplo 1
+    ```bash
+    curl -G \
+      -d 'Year=2014' \
+      -d 'Mileage=31909' \
+      -d 'State=MD' \
+      -d 'Make=Nissan' \
+      -d 'Model=MuranoAWD' \
+      "https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference"
+    ```
 
-```bash
-curl -G \
-  -d 'Year=2014' \
-  -d 'Mileage=31909' \
-  -d 'State=MD' \
-  -d 'Make=Nissan' \
-  -d 'Model=MuranoAWD' \
-  "https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference"
-```
+    Ejemplo 2
+    ```bash
+    curl -G \
+      -d 'Year=2017' \
+      -d 'Mileage=5362' \
+      -d 'State=FL' \
+      -d 'Make=Jeep' \
+      -d 'Model=Wrangler' \
+      "https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference"
+    ```
+
+
 2. En la barra del navegador de tu preferencia
 
-```bash
+|Ejemplo 1 | Ejemplo 2 |
+|---|---|
+|https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference?Year=2014&Mileage=31909&State=MD&Make=Nissan&Model=MuranoAWD |https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference?Year=2017&Mileage=5362&State=FL&Make=Jeep&Model=Wrangler| 
 
-```
 
 3. Empleando [hoppscotch](https://hoppscotch.io/) (servicio similar a **postman** pero online)
 
+
+
+    Para la carga masiva mostrada en la imagen de arriba
+    |Ejemplo 1 | Ejemplo 2 |
+    |---|---|
+    |Year:2014<br>Mileage:31909<br>State:MD<br>Make:Nissan<br>Model:MuranoAWD|Year:2017<br>Mileage:5362<br>State:FL<br>Make:Jeep<br>Model:Wrangler|
+
+    Url método **GET**
+    ```bash
+    https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference
+    ```
+
+
+> Nota: Para los ejemplos 1 y 2, se obtienen las respuestas `20876.814453125` y `36710.9609375` respectivamente.
 
 
 ## Eliminar Recursos
