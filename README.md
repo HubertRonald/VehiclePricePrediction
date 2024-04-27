@@ -1,31 +1,16 @@
 # VehiclePricePrediction
 
 ```bash
-curl --request POST \
-  --url https://localhost:3000/inference \
-  --header 'content-type: application/json' \
-  --data '{
-        "data": {
-                "Year": 2014,
-                "Mileage": 31909,
-                "State": " MD",
-                "Make": "Nissan",
-                "Model": "MuranoAWD"
-        }
-    }'
-
 curl -X GET \
   -H "Content-type: application/json" \
   -d '{
-        "data": {
-                "Year": 2014,
-                "Mileage": 31909,
-                "State": " MD",
-                "Make": "Nissan",
-                "Model": "MuranoAWD"
-        }
+          "Year": 2014,
+          "Mileage": 31909,
+          "State": " MD",
+          "Make": "Nissan",
+          "Model": "MuranoAWD"
     }' \
-  "https://5m990pyue4.execute-api.us-east-1.amazonaws.com/Prod/inference"
+  "https://localhost:3000/inference"
 ```
 
 Check region y accountID

@@ -34,8 +34,7 @@ def lambda_handler(event, context):
     try:
         # Obtener los datos del cuerpo de la solicitud
         if 'body' in event:
-            body = json.loads(event['body'])
-            data = body['data']
+            data = json.loads(event['body'])
         else:
             data = event['data']
 
