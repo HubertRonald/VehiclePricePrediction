@@ -36,7 +36,7 @@ def lambda_handler(event, context):
         if 'body' in event:
             data = json.loads(event['body'])
         else:
-            data = event['data']
+            data = event
 
         # Resto del código para procesar los datos
     except KeyError as e:
