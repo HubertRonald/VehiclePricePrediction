@@ -1,7 +1,10 @@
 {
-  "Year": 2014,
-  "Mileage": 31909,
-  "State": " MD",
-  "Make": "Nissan",
-  "Model": "MuranoAWD"
+  "httpMethod": "GET",
+  "queryStringParameters": {
+    "Year": "2014",
+    "Mileage": "31909",
+    "State": "MD",
+    "Make": "Nissan",
+    "Model": "MuranoAWD"
+  }
 }

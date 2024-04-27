@@ -33,12 +33,25 @@ def lambda_handler(event, context):
     # read data
     try:
         # Obtener los datos del cuerpo de la solicitud
-        if 'body' in event:
-            data = json.loads(event['body'])
+        if event['httpMethod'] == 'GET':
+            # Obtener los parámetros de la cadena de consulta de la URL
+            parameters = event['queryStringParameters']
+            # Resto del código para procesar los parámetros
+            data = {
+                'Year': int(parameters.get('Year', 0)),
+                'Mileage': int(parameters.get('Mileage', 0)),
+                'State': f" {parameters.get('State', '').strip()}",
+                'Make': parameters.get('Make', ''),
+                'Model': parameters.get('Model', '')
+            }
+            
         else:
-            data = event
+            # Obtener los datos del cuerpo de la solicitud
+            if 'body' in event:
+                data = json.loads(event['body'])
+            else:
+                data = event
 
-        # Resto del código para procesar los datos
     except KeyError as e:
         return {
             "statusCode": 400,
@@ -46,7 +59,6 @@ def lambda_handler(event, context):
         }
 
     # predict
-    data['State'] = f" {data.get('State', '').strip()}"
     X_request = pd.DataFrame({col:{'0':val} for col, val in data.items()})
     enc_pred = model.predict(X_request)[0]
     
