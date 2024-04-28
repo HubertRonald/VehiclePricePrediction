@@ -178,7 +178,7 @@ Para obtener (método **GET**) la prediccion del precio de un vehículo a partir
     |---|---|
     |Year:2014<br>Mileage:31909<br>State:MD<br>Make:Nissan<br>Model:MuranoAWD|Year:2017<br>Mileage:5362<br>State:FL<br>Make:Jeep<br>Model:Wrangler|
 
-    Url método **GET**
+    Endpoint método **GET**
     ```bash
     https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference
     ```
