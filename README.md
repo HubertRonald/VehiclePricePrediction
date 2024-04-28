@@ -121,9 +121,16 @@ flowchart LR
 
 Para obtener (método **GET**) la prediccion del precio de un vehículo a partir del modelo previamente industrializado, se tienen las siguientes opciones
 
-1. En una terminal con alguna distribución Linux, Unix (macOS) o PowerShell de Windows (También puede emularse un [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) en Windows)
+1. En la barra del navegador de tu preferencia
+
+|Ejemplo 1 - E1 | Ejemplo 2 - E2 |
+|---|---|
+|https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference?Year=2014&Mileage=31909&State=MD&Make=Nissan&Model=MuranoAWD |https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference?Year=2017&Mileage=5362&State=FL&Make=Jeep&Model=Wrangler| 
+
+
+2. En una terminal con alguna distribución Linux, Unix (macOS) o PowerShell de Windows (También puede emularse un [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) en Windows)
    
-    Ejemplo 1
+    **Ejemplo 1 - E1**
     ```bash
     curl -G \
       -d 'Year=2014' \
@@ -134,7 +141,7 @@ Para obtener (método **GET**) la prediccion del precio de un vehículo a partir
       "https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference"
     ```
 
-    Ejemplo 2
+    **Ejemplo 2 - E2**
     ```bash
     curl -G \
       -d 'Year=2017' \
@@ -145,20 +152,29 @@ Para obtener (método **GET**) la prediccion del precio de un vehículo a partir
       "https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference"
     ```
 
-
-2. En la barra del navegador de tu preferencia
-
-|Ejemplo 1 | Ejemplo 2 |
-|---|---|
-|https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference?Year=2014&Mileage=31909&State=MD&Make=Nissan&Model=MuranoAWD |https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference?Year=2017&Mileage=5362&State=FL&Make=Jeep&Model=Wrangler| 
-
-
 3. Empleando [hoppscotch](https://hoppscotch.io/) (servicio similar a **postman** pero online)
 
+    **Ejemplo 1 - E1**
+
+    *Formulario E1*
+    ![](./src/11org.png)
+
+    ---
+    *Respuesta E1*
+    ![](./src/12org.png)
 
 
-    Para la carga masiva mostrada en la imagen de arriba
-    |Ejemplo 1 | Ejemplo 2 |
+    **Ejemplo 2 - E2**
+
+    *Formulario E2*
+    ![](./src/21org.png)
+    
+    ---
+    *Respuesta E2*
+    ![](./src/22org.png)
+
+    Para la carga masiva mostradas en las imagenes de arriba
+    |Ejemplo 1 - E1 | Ejemplo 2 - E2 |
     |---|---|
     |Year:2014<br>Mileage:31909<br>State:MD<br>Make:Nissan<br>Model:MuranoAWD|Year:2017<br>Mileage:5362<br>State:FL<br>Make:Jeep<br>Model:Wrangler|
 
