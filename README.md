@@ -131,7 +131,7 @@ Para obtener (método **GET**) la prediccion del precio de un vehículo a partir
     ```bash
     https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference
     ```
-    Seguido del simbolo **?** y de los **parámetros=valor** unidos por **&**
+    Seguido del simbolo **?** y de cada **parametro=valor** unido por **&**
     
     ```bash
     Year=<valor>&Mileage=<valor>&State=<valor>&Make=<valor>&Model=<valor>
