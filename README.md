@@ -123,9 +123,20 @@ Para obtener (método **GET**) la prediccion del precio de un vehículo a partir
 
 1. En la barra del navegador de tu preferencia
 
-|Ejemplo 1 - E1 | Ejemplo 2 - E2 |
-|---|---|
-|https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference?Year=2014&Mileage=31909&State=MD&Make=Nissan&Model=MuranoAWD |https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference?Year=2017&Mileage=5362&State=FL&Make=Jeep&Model=Wrangler| 
+    |Ejemplo 1 - E1 | Ejemplo 2 - E2 |
+    |---|---|
+    |https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference?Year=2014&Mileage=31909&State=MD&Make=Nissan&Model=MuranoAWD |https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference?Year=2017&Mileage=5362&State=FL&Make=Jeep&Model=Wrangler| 
+
+    Endpoint método **GET**
+    ```bash
+    https://56wgw6okv8.execute-api.us-east-1.amazonaws.com/Prod/inference
+    ```
+    Seguido del simbolo **?** y de los **parámetros=valor** unidos por **&**
+    
+    ```bash
+    Year=<valor>&Mileage=<valor>&State=<valor>&Make=<valor>&Model=<valor>
+    ```
+    >**Nota:** reemplazar \<valor> según el parámetro (`Year`, `Mileage`, `State`, `Make` y `Model`) que corresponda
 
 
 2. En una terminal con alguna distribución Linux, Unix (macOS) o PowerShell de Windows (También puede emularse un [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) en Windows)
